@@ -97,6 +97,7 @@ def main():
                 doc_ref = db.collection(u'users').document(u'{}'.format('recent_login'))
                 doc_ref.set({u'recent_login':u'{}'.format(user_id)})
                 link="https://pavankm96-food-recomendation-food-det-mob-ou4oy3.streamlit.app/"
+                link="<h1>Click Here:</h1>"+" <h2>"+link+"</h2>"
                 st.markdown(link, unsafe_allow_html=True)
                     
             else:
