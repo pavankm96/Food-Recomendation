@@ -92,7 +92,8 @@ def main():
                 rec_log=open('recent_login.txt','w')
                 rec_log.write(str(user_id))
                 rec_log.close()
-                subprocess.run(["streamlit", "run", "food_det_mob.py"])
+                #subprocess.run(["streamlit", "run", "food_det_mob.py"])
+                st.redirect("https://pavankm96-food-recomendation-food-det-mob-ou4oy3.streamlit.app/")
                     
             else:
                 st.error("Login Unsuccessful!!!! Please check User Id and Password")
