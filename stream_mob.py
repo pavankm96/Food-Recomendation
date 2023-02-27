@@ -23,6 +23,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 import firebase_admin
+from bokeh.models.widgets import Div
 
 st.set_page_config(page_title="User Login and Signup", page_icon=":guardsman:", layout="wide")
 # Use a service account.
@@ -93,7 +94,11 @@ def main():
                 rec_log.write(str(user_id))
                 rec_log.close()
                 #subprocess.run(["streamlit", "run", "food_det_mob.py"])
-                st.redirect("https://pavankm96-food-recomendation-food-det-mob-ou4oy3.streamlit.app/")
+                js = "window.open('https://pavankm96-food-recomendation-food-det-mob-ou4oy3.streamlit.app/')"  # New tab or window
+                js = "window.location.href = 'https://www.streamlit.io/'"  # Current tab
+                html = '<img src onerror="{}">'.format(js)
+                div = Div(text=html)
+                st.bokeh_chart(div)
                     
             else:
                 st.error("Login Unsuccessful!!!! Please check User Id and Password")
