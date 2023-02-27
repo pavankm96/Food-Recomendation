@@ -1,0 +1,7 @@
+tensorflow
+keras
+PIL
+subprocess
+firebase_admin
+xgboost
+scikit-learn
