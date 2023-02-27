@@ -40,7 +40,7 @@ def init_with_service_account(file_path):
          firebase_admin.initialize_app(cred)
      return firestore.client()
 
-db = init_with_service_account('D:/Food Detector Streamlit/food-recommendation-38053-firebase-adminsdk-s51o3-42bf7b6768.json')
+db = init_with_service_account('food-recommendation-38053-firebase-adminsdk-s51o3-42bf7b6768.json')
 
 start = [0]
 passed = [0]
@@ -57,7 +57,7 @@ nutrients = [
     {'name': 'vitamins', 'value': 0.0}
 ]
 
-with open('D:/Food Detector Streamlit/nutrition101.csv', 'r') as file:
+with open('nutrition101.csv', 'r') as file:
     reader = csv.reader(file)
     nutrition_table = dict()
     for i, row in enumerate(reader):
@@ -108,10 +108,6 @@ def img_analysis(img_path, plot=False):
     plt.show()    
     return predicted_label,pred_text
 
-conn = pyodbc.connect(r'Driver=SQL Server;Server=LAPTOP-8UGPMCFP\SQLEXPRESS;Database=User_details;Trusted_Connection=yes;')
-
-cursor = conn.cursor()
-
 def search_user_det(user_id):
     users_ref = db.collection(u'users')
     docs = users_ref.stream()
@@ -153,7 +149,7 @@ def predict(filename):
     print('successfully packed')
     pred_value = pred
     #newly added code - start
-    df=pd.read_csv('D:/Food Detector Streamlit/calorie_data.csv')
+    df=pd.read_csv('calorie_data.csv')
     e=list(df['categories'].values)
     print(pred_value)
     calo_per_wght=df[df['categories']== pred_value]['cal_per_weight'].values[0]
@@ -185,7 +181,7 @@ def predict(filename):
     d = {'Height': [height], 'Weight': [weight],'Gender_no':[gender_no]}
     df1 = pd.DataFrame(data=d)
     #read the datset and split into test and train
-    data=pd.read_csv('D:/Food Detector Streamlit/bmi_level.csv')
+    data=pd.read_csv('bmi_level.csv')
     labels=pd.DataFrame(data['Index'])
     features=data.drop(['Gender','Index'],axis=1)
 
@@ -426,7 +422,7 @@ model_file = 'D:/Food Detector Streamlit/food101_final_model.h5'
 model = Model(inputs=base_model.input, outputs=predictions)
 model.load_weights(model_file)
 ## Load the class labels (which are indexes are the same as the ones from generator)
-with open('D:/Food Detector Streamlit/labels.txt', 'r') as f: 
+with open('labels.txt', 'r') as f: 
     food101 = [l.strip().lower() for l in f]
 
 if img_file_buffer is not None:
