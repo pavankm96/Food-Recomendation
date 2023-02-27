@@ -3,4 +3,4 @@ firebase_admin
 xgboost
 scikit-learn
 matplotlib
-bokeh
+bokeh==2.4.3
