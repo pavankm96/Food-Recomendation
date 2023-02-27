@@ -113,6 +113,16 @@ def search_user_det(user_id):
             abc=doc.to_dict()
     return abc
 
+def search_recent_login():
+    users_ref = db.collection(u'users')
+    docs = users_ref.stream()
+    abc={}
+    for doc in docs:
+        if doc.id=='recent_login':
+            abc=doc.to_dict()
+            abc=abc["recent_login"]
+    return abc
+
 def predict(filename):
     result = []
     #pred=''
@@ -153,9 +163,9 @@ def predict(filename):
     #height=int(input("enter ur height"))
     #weight= int(input("enter ur weight")) 
     #gender= input("enter ur gender M for Male and F for Female")
-    rec_log=open('recent_login.txt')
-    user_id=rec_log.read()
-    data=search_user_det(user_id)
+    
+    rec_log_id=search_recent_login()
+    data=search_user_det(rec_log_id)
     height = int(data['height'])
     weight = int(data['weight'])
     gender = str(data['username']).strip()
