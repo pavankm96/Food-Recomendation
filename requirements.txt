@@ -1,5 +1,4 @@
 tensorflow
-PIL
 subprocess
 firebase_admin
 xgboost
