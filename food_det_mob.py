@@ -21,7 +21,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from keras.preprocessing import image
 import numpy as np 
-import cv2  
 from PIL import Image
 import xgboost as xgb
 import firebase_admin
@@ -87,8 +86,7 @@ def path_to_tensor(img_path):
     # convert 3D tensor to 4D tensor with shape (1, 299, 299, 3) and return 4D tensor
     #return np.expand_dims(x, axis=0)
     return x
-
-import cv2  
+  
 
 def img_analysis(img_path, plot=False): 
     # process image 
