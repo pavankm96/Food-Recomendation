@@ -1,5 +1,4 @@
 tensorflow
-keras
 PIL
 subprocess
 firebase_admin
