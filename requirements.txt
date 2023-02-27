@@ -2,3 +2,4 @@ tensorflow
 firebase_admin
 xgboost
 scikit-learn
+matplotlib
