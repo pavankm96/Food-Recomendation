@@ -1,14 +1,9 @@
 import streamlit as st
-import pyodbc
 import tensorflow
-from flask import Flask, request, render_template
-import csv
-import math
 import os
 import numpy as np
 from tensorflow.keras.preprocessing import image
 from tensorflow.python.keras.models import load_model
-from werkzeug.utils import secure_filename
 from keras.preprocessing.image import ImageDataGenerator
 from keras.applications.inception_v3 import preprocess_input
 from keras.applications.inception_v3 import InceptionV3
@@ -47,7 +42,7 @@ passed = [0]
 pack = [[]]
 num = [0]
 
-st.set_page_config(page_title="User Login and Signup", page_icon=":guardsman:", layout="wide")
+st.set_page_config(page_title="food recomendation", page_icon=":guardsman:", layout="wide")
 
 nutrients = [
     {'name': 'protein', 'value': 0.0},
