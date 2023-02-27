@@ -28,7 +28,6 @@ st.set_page_config(page_title="User Login and Signup", page_icon=":guardsman:", 
 # Use a service account.
 #firebase_admin.delete_app(firebase_admin.get_app())
 
-#cred = credentials.Certificate('D:/Food Detector Streamlit/food-recommendation-38053-firebase-adminsdk-s51o3-42bf7b6768.json')
 #app = firebase_admin.initialize_app(cred)
 
 def init_with_service_account(file_path):
@@ -44,7 +43,7 @@ def init_with_service_account(file_path):
          firebase_admin.initialize_app(cred)
      return firestore.client()
 
-db=init_with_service_account('D:/Food Detector Streamlit/food-recommendation-38053-firebase-adminsdk-s51o3-42bf7b6768.json')
+db=init_with_service_account('food-recommendation-38053-firebase-adminsdk-s51o3-42bf7b6768.json')
 #db = firestore.client()
 
 def login_user(user_id, password):
