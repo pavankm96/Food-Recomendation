@@ -94,11 +94,8 @@ def main():
                 rec_log.write(str(user_id))
                 rec_log.close()
                 #subprocess.run(["streamlit", "run", "food_det_mob.py"])
-                js = "window.open('https://pavankm96-food-recomendation-food-det-mob-ou4oy3.streamlit.app/')"  # New tab or window
-                js = "window.location.href = 'https://www.streamlit.io/'"  # Current tab
-                html = '<img src onerror="{}">'.format(js)
-                div = Div(text=html)
-                st.bokeh_chart(div)
+                link = 'https://pavankm96-food-recomendation-food-det-mob-ou4oy3.streamlit.app/'
+                st.markdown(link, unsafe_allow_html=True)
                     
             else:
                 st.error("Login Unsuccessful!!!! Please check User Id and Password")
