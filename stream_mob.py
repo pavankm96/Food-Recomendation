@@ -1,9 +1,5 @@
 import streamlit as st
-import pyodbc
 import tensorflow
-from flask import Flask, request, render_template
-import csv
-import math
 import os
 import numpy as np
 from tensorflow.keras.preprocessing import image
@@ -21,7 +17,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from keras.preprocessing import image
 import numpy as np 
-import cv2  
 from PIL import Image
 import subprocess
 import firebase_admin
