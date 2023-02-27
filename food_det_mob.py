@@ -371,8 +371,7 @@ nu_link = 'https://www.nutritionix.com/food/'
 #print('model successfully loaded!')
 
 n_classes = 101
-#weght_path = "C:\\Users\\girish\\.cache\\torch\\hub\\checkpoints\\inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5"
-weght_path="C:/Users/Pavan K M/inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5"
+weght_path="inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5"
 
 #upload_file=st.file_uploader("Choose an image:", type=["jpg", "jpeg", "png", "gif"])
 #file_path = st.file_uploader.get_file_path_or_buffer(uploaded_file)
@@ -397,7 +396,7 @@ if img_file_buffer is not None:
     # Should output shape: (height, width, channels)
     st.write(img_array.shape)
 
-weght_path="C:/Users/Pavan K M/inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5"
+weght_path="inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5"
 # base model is inception_v3 weights pre-trained on ImageNet
 base_model = InceptionV3(
     weights=None, 
