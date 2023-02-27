@@ -76,7 +76,7 @@ def predict_class(model, images, show = True):
 def main():
     st.markdown("<style>input {font-size: 40px;}</style>", unsafe_allow_html=True)
 
-    menu = ["Homepage", "Login", "Signup"]
+    menu = [ "Login", "Signup","Homepage"]
     choice = st.sidebar.selectbox("Select an option", menu)
 
     if choice == "Homepage":
