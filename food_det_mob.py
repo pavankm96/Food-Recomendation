@@ -418,7 +418,7 @@ x = Dropout(.4)(x)
 x = Flatten()(x)
 
 predictions = Dense(n_classes, activation='softmax')(x)    
-model_file = 'D:/Food Detector Streamlit/food101_final_model.h5'
+model_file = 'food101_final_model.h5'
 model = Model(inputs=base_model.input, outputs=predictions)
 model.load_weights(model_file)
 ## Load the class labels (which are indexes are the same as the ones from generator)
