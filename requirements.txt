@@ -1,5 +1,4 @@
 tensorflow
-subprocess
 firebase_admin
 xgboost
 scikit-learn
