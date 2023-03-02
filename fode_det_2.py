@@ -418,7 +418,7 @@ with open('labels.txt', 'r') as f:
     food101 = [l.strip().lower() for l in f]
 
 if upload_file or img_file_buffer is not None:
-    if upload_file is not none:
+    if upload_file is not None:
           recom_text,recom_text_dcb,pred_text,yes_no,more_values=predict(upload_file)
           col1,col2,col3=st.columns(3)
           with col2:
@@ -426,7 +426,7 @@ if upload_file or img_file_buffer is not None:
                st.markdown("<br>", unsafe_allow_html=True)
                st.markdown(html,unsafe_allow_html=True)
                st.markdown("<br>", unsafe_allow_html=True)
-    if img_file_buffer is not none:
+    if img_file_buffer is not None
           recom_text,recom_text_dcb,pred_text,yes_no,more_values=predict(img_file_buffer)
           col1,col2,col3=st.columns(3)
           with col2:
