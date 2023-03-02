@@ -180,7 +180,7 @@ def predict(filename):
     d = {'Height': [height], 'Weight': [weight],'Gender_no':[gender_no]}
     df1 = pd.DataFrame(data=d)
     #read the datset and split into test and train
-    data=pd.read_csv('D:/Food Detector Streamlit/bmi_level.csv')
+    data=pd.read_csv('bmi_level.csv')
     labels=pd.DataFrame(data['Index'])
     features=data.drop(['Gender','Index'],axis=1)
 
@@ -405,11 +405,11 @@ x = Dropout(.4)(x)
 x = Flatten()(x)
 
 predictions = Dense(n_classes, activation='softmax')(x)    
-model_file = 'D:/Food Detector Streamlit/food101_final_model.h5'
+model_file = 'food101_final_model.h5'
 model = Model(inputs=base_model.input, outputs=predictions)
 model.load_weights(model_file)
 ## Load the class labels (which are indexes are the same as the ones from generator)
-with open('D:/Food Detector Streamlit/labels.txt', 'r') as f: 
+with open('labels.txt', 'r') as f: 
     food101 = [l.strip().lower() for l in f]
 
 if img_file_buffer is not None:
