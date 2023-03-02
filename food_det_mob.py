@@ -54,7 +54,7 @@ nutrients = [
     {'name': 'vitamins', 'value': 0.0}
 ]
 
-with open('D:/Food Detector Streamlit/nutrition101.csv', 'r') as file:
+with open('nutrition101.csv', 'r') as file:
     reader = csv.reader(file)
     nutrition_table = dict()
     for i, row in enumerate(reader):
