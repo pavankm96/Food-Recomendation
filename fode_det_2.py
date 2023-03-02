@@ -426,7 +426,7 @@ if img_file_buffer or img_file_buffer is not None:
                st.markdown("<br>", unsafe_allow_html=True)
                st.markdown(html,unsafe_allow_html=True)
                st.markdown("<br>", unsafe_allow_html=True)
-     if img_file_buffer is not none:
+    if img_file_buffer is not none:
           recom_text,recom_text_dcb,pred_text,yes_no,more_values=predict(img_file_buffer)
           col1,col2,col3=st.columns(3)
           with col2:
