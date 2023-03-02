@@ -424,15 +424,11 @@ if upload_file or img_file_buffer is not None:
           with col2:
                st.image(upload_file,width=600)
                st.markdown("<br>", unsafe_allow_html=True)
-               st.markdown(html,unsafe_allow_html=True)
-               st.markdown("<br>", unsafe_allow_html=True)
     if img_file_buffer is not None:
           recom_text,recom_text_dcb,pred_text,yes_no,more_values=predict(img_file_buffer)
           col1,col2,col3=st.columns(3)
           with col2:
                st.image(img_file_buffer,width=600)
-               st.markdown("<br>", unsafe_allow_html=True)
-               st.markdown(html,unsafe_allow_html=True)
                st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("<br>",unsafe_allow_html=True)
     #col3,col4=st.columns([10,10])
@@ -449,6 +445,7 @@ if upload_file or img_file_buffer is not None:
     
         
     # Draw a styled separator line
+    st.markdown(html,unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
     
