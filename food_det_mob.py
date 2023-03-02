@@ -394,8 +394,6 @@ img_file_buffer = st.camera_input("Take a picture")
 '''Capture Picture or Upload Picture'''
 upload_file=st.file_uploader("Choose an image:", type=["jpg", "jpeg", "png", "gif"])
 
-
-weght_path="inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5"
 # base model is inception_v3 weights pre-trained on ImageNet
 base_model = InceptionV3(
     weights=None, 
