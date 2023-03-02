@@ -417,10 +417,23 @@ model.load_weights(model_file)
 with open('labels.txt', 'r') as f: 
     food101 = [l.strip().lower() for l in f]
 
-if img_file_buffer is not None:
-    recom_text,recom_text_dcb,pred_text,yes_no,more_values=predict(img_file_buffer)
-
-    col1,col2,col3=st.columns(3)
+if img_file_buffer or img_file_buffer is not None:
+    if upload_file is not none:
+          recom_text,recom_text_dcb,pred_text,yes_no,more_values=predict(upload_file)
+          col1,col2,col3=st.columns(3)
+          with col2:
+               st.image(upload_file,width=600)
+               st.markdown("<br>", unsafe_allow_html=True)
+               st.markdown(html,unsafe_allow_html=True)
+               st.markdown("<br>", unsafe_allow_html=True)
+     if img_file_buffer is not none:
+          recom_text,recom_text_dcb,pred_text,yes_no,more_values=predict(img_file_buffer)
+          col1,col2,col3=st.columns(3)
+          with col2:
+               st.image(img_file_buffer,width=600)
+               st.markdown("<br>", unsafe_allow_html=True)
+               st.markdown(html,unsafe_allow_html=True)
+               st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("<br>",unsafe_allow_html=True)
     #col3,col4=st.columns([10,10])
     html="<p> <b><h1>"+pred_text+"</h1><br><h2>"+recom_text+"</h2><br><h1>"+recom_text_dcb+"</h1></b></p>"
@@ -438,12 +451,6 @@ if img_file_buffer is not None:
     # Draw a styled separator line
     st.markdown("<br>", unsafe_allow_html=True)
 
-    with col2:
-
-        st.image(upload_file,width=600)
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown(html,unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
     
     nutrients=pd.DataFrame(nutrients)
     labels = 'Protien', 'Calcium', 'Fat', 'Carbohydrates', 'Vitamins'
@@ -478,64 +485,4 @@ if img_file_buffer is not None:
     more_nutri="<center><h1><a href="+more_values+"> Click Hear for more Nutritional Values</a></h1></center>"
     st.markdown(more_nutri,unsafe_allow_html=True)
 
-if upload_file is not None:
-    recom_text,recom_text_dcb,pred_text,yes_no,more_values=predict(upload_file)
-
-    col1,col2,col3=st.columns(3)
-    st.markdown("<br>",unsafe_allow_html=True)
-    #col3,col4=st.columns([10,10])
-    html="<p> <b><h1>"+pred_text+"</h1><br><h2>"+recom_text+"</h2><br><h1>"+recom_text_dcb+"</h1></b></p>"
-    if yes_no is not None:
-        if len(yes_no)==1:
-            for i in yes_no:
-                recom_text_dcb=recom_text_dcb+" "+i
-            html="<p> <b><h1>"+pred_text+"<br></h1><h2>"+recom_text+"</h2><br><h1>"+recom_text_dcb+"</h1></b></p>"
-        else:
-            for i in yes_no:
-                recom_text_dcb=recom_text_dcb+"<br>"+i
-            html="<p> <b><h1>"+pred_text+"</h1><br><h2>"+recom_text+"</h2><br><h1>"+recom_text_dcb+"</h1></b></p>"
-    
-        
-    # Draw a styled separator line
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    with col2:
-
-        st.image(upload_file,width=600)
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown(html,unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-    
-    nutrients=pd.DataFrame(nutrients)
-    labels = 'Protien', 'Calcium', 'Fat', 'Carbohydrates', 'Vitamins'
-    sizes = list(nutrients['value'])
-    max_size_pos=max(sizes)
-    max_size_pos=sizes.index(max_size_pos)
-    explode = (0,0,0,0,0)  
-    explode=list(explode)
-    explode[max_size_pos]=0.1
-    explode=tuple(explode)
-
-    fig1, ax1 = plt.subplots()
-    ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
-    shadow=False, startangle=90)
-    ax1.axis('equal') 
-    plt.show()
-    st.markdown("<h1> <center> Nutrtional Graph </center> </h1><br>",unsafe_allow_html=True)
-    st.pyplot(fig1)
-
-    nutrients=pd.DataFrame(nutrients)
-    nutrients=nutrients.style.set_table_styles(
-            [{'selector': 'th.col_heading',
-              'props': [('background-color', 'maroon'),("font-size", "55px"),("border", "3px solid black"),("text-align","center"),("color","white")]},
-             {'selector': 'td',
-              'props': [("font-size", "50px"),("border", "3px solid black"),("text-align","center"),("background-color","yellow")]},
-             {'selector': 'tr',
-              'props': [('background-color', '#f4f4f4')]}])
-    nutrients=nutrients.hide_index()
-    st.markdown("<h1> <center> Nutrtional Values </center> </h1><br>",unsafe_allow_html=True)
-    st.markdown("<center>"+nutrients.to_html()+"</center>",unsafe_allow_html=True)
-
-    more_nutri="<center><h1><a href="+more_values+"> Click Hear for more Nutritional Values</a></h1></center>"
-    st.markdown(more_nutri,unsafe_allow_html=True)
 print("nutri=",nutrients)
