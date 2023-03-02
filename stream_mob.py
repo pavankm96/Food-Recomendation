@@ -96,8 +96,10 @@ def main():
                 #subprocess.run(["streamlit", "run", "food_det_mob.py"])
                 doc_ref = db.collection(u'users').document(u'{}'.format('recent_login'))
                 doc_ref.set({u'recent_login':u'{}'.format(user_id)})
-                link="https://pavankm96-food-recomendation-food-det-mob-wgwf3v.streamlit.app/"
-                link="<h1>Click Here:</h1>"+" <h2> <a href="+link+"> Food Recomedation App</a></h2>"
+                link_r="https://pavankm96-food-recomendation-realtime-photo-8s7ual.streamlit.app/"
+                link_u="https://pavankm96-food-recomendation-upload-image-ftwc8q.streamlit.app/"
+                link="<h1>Click Here:</h1>"+" <h2> <a href="+link_r+"> Use Camera for Food Detection and Recomendation </a></h2>"
+                link=link+"<br> <h1>Click Here:</h1>"+" <h2> <a href="+link_u+"> upload Food Image for Food Detection and Recomendation </a></h2>"
                 st.markdown(link, unsafe_allow_html=True)
                     
             else:
