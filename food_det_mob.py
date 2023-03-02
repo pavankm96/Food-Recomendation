@@ -146,7 +146,7 @@ def predict(filename):
     print('successfully packed')
     pred_value = pred
     #newly added code - start
-    df=pd.read_csv('D:/Food Detector Streamlit/calorie_data.csv')
+    df=pd.read_csv('calorie_data.csv')
     e=list(df['categories'].values)
     print(pred_value)
     calo_per_wght=df[df['categories']== pred_value]['cal_per_weight'].values[0]
