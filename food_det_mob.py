@@ -1,10 +1,14 @@
 import streamlit as st
+import pyodbc
 import tensorflow
+from flask import Flask, request, render_template
+import csv
+import math
 import os
 import numpy as np
-import csv
 from tensorflow.keras.preprocessing import image
 from tensorflow.python.keras.models import load_model
+from werkzeug.utils import secure_filename
 from keras.preprocessing.image import ImageDataGenerator
 from keras.applications.inception_v3 import preprocess_input
 from keras.applications.inception_v3 import InceptionV3
@@ -36,14 +40,14 @@ def init_with_service_account(file_path):
          firebase_admin.initialize_app(cred)
      return firestore.client()
 
-db = init_with_service_account('food-recommendation-38053-firebase-adminsdk-s51o3-42bf7b6768.json')
+db = init_with_service_account('D:/Food Detector Streamlit/food-recommendation-38053-firebase-adminsdk-s51o3-42bf7b6768.json')
 
 start = [0]
 passed = [0]
 pack = [[]]
 num = [0]
 
-st.set_page_config(page_title="food recomendation", page_icon=":guardsman:", layout="wide")
+st.set_page_config(page_title="User Login and Signup", page_icon=":guardsman:", layout="wide")
 
 nutrients = [
     {'name': 'protein', 'value': 0.0},
@@ -53,7 +57,7 @@ nutrients = [
     {'name': 'vitamins', 'value': 0.0}
 ]
 
-with open('nutrition101.csv', 'r') as file:
+with open('D:/Food Detector Streamlit/nutrition101.csv', 'r') as file:
     reader = csv.reader(file)
     nutrition_table = dict()
     for i, row in enumerate(reader):
@@ -82,7 +86,7 @@ def path_to_tensor(img_path):
     # convert 3D tensor to 4D tensor with shape (1, 299, 299, 3) and return 4D tensor
     #return np.expand_dims(x, axis=0)
     return x
-  
+ 
 
 def img_analysis(img_path, plot=False): 
     # process image 
@@ -104,6 +108,10 @@ def img_analysis(img_path, plot=False):
     plt.show()    
     return predicted_label,pred_text
 
+conn = pyodbc.connect(r'Driver=SQL Server;Server=LAPTOP-8UGPMCFP\SQLEXPRESS;Database=User_details;Trusted_Connection=yes;')
+
+cursor = conn.cursor()
+
 def search_user_det(user_id):
     users_ref = db.collection(u'users')
     docs = users_ref.stream()
@@ -111,16 +119,6 @@ def search_user_det(user_id):
     for doc in docs:
         if doc.id==user_id:
             abc=doc.to_dict()
-    return abc
-
-def search_recent_login():
-    users_ref = db.collection(u'users')
-    docs = users_ref.stream()
-    abc={}
-    for doc in docs:
-        if doc.id=='recent_login':
-            abc=doc.to_dict()
-            abc=abc["recent_login"]
     return abc
 
 def predict(filename):
@@ -155,7 +153,7 @@ def predict(filename):
     print('successfully packed')
     pred_value = pred
     #newly added code - start
-    df=pd.read_csv('calorie_data.csv')
+    df=pd.read_csv('D:/Food Detector Streamlit/calorie_data.csv')
     e=list(df['categories'].values)
     print(pred_value)
     calo_per_wght=df[df['categories']== pred_value]['cal_per_weight'].values[0]
@@ -163,15 +161,15 @@ def predict(filename):
     #height=int(input("enter ur height"))
     #weight= int(input("enter ur weight")) 
     #gender= input("enter ur gender M for Male and F for Female")
-    
-    rec_log_id=search_recent_login()
-    data=search_user_det(rec_log_id)
+    rec_log=open('recent_login.txt')
+    user_id=rec_log.read()
+    data=search_user_det(user_id)
     height = int(data['height'])
     weight = int(data['weight'])
     gender = str(data['username']).strip()
     Diab=str(data['Diabetic']).strip()
     Chol=str(data['Cholestrol']).strip()
-    bp=str(data['BP']).strip()
+    bp=str(data['BP'][0]).strip()
     alergy=str(data['Allergy']).strip()
     #Smoke=str(data['Smoking']).strip()
     #Alcohol=str(data['Alcohol']).strip()
@@ -187,7 +185,7 @@ def predict(filename):
     d = {'Height': [height], 'Weight': [weight],'Gender_no':[gender_no]}
     df1 = pd.DataFrame(data=d)
     #read the datset and split into test and train
-    data=pd.read_csv('bmi_level.csv')
+    data=pd.read_csv('D:/Food Detector Streamlit/bmi_level.csv')
     labels=pd.DataFrame(data['Index'])
     features=data.drop(['Gender','Index'],axis=1)
 
@@ -381,7 +379,8 @@ nu_link = 'https://www.nutritionix.com/food/'
 #print('model successfully loaded!')
 
 n_classes = 101
-weght_path="inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5"
+#weght_path = "C:\\Users\\girish\\.cache\\torch\\hub\\checkpoints\\inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5"
+weght_path="C:/Users/Pavan K M/inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5"
 
 #upload_file=st.file_uploader("Choose an image:", type=["jpg", "jpeg", "png", "gif"])
 #file_path = st.file_uploader.get_file_path_or_buffer(uploaded_file)
@@ -390,9 +389,11 @@ from PIL import Image
 import numpy as np
 
 img_file_buffer = st.camera_input("Take a picture")
+'''Capture Picture or Upload Picture'''
 upload_file=st.file_uploader("Choose an image:", type=["jpg", "jpeg", "png", "gif"])
 
-weght_path="inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5"
+
+weght_path="C:/Users/Pavan K M/inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5"
 # base model is inception_v3 weights pre-trained on ImageNet
 base_model = InceptionV3(
     weights=None, 
@@ -409,11 +410,11 @@ x = Dropout(.4)(x)
 x = Flatten()(x)
 
 predictions = Dense(n_classes, activation='softmax')(x)    
-model_file = 'food101_final_model.h5'
+model_file = 'D:/Food Detector Streamlit/food101_final_model.h5'
 model = Model(inputs=base_model.input, outputs=predictions)
 model.load_weights(model_file)
 ## Load the class labels (which are indexes are the same as the ones from generator)
-with open('labels.txt', 'r') as f: 
+with open('D:/Food Detector Streamlit/labels.txt', 'r') as f: 
     food101 = [l.strip().lower() for l in f]
 
 if img_file_buffer is not None:
@@ -471,23 +472,6 @@ if img_file_buffer is not None:
     more_nutri="<center><h1><a href="+more_values+"> Click Hear for more Nutritional Values</a></h1></center>"
     st.markdown(more_nutri,unsafe_allow_html=True)
 
-     ]if upload_file is not None:
-    recom_text,recom_text_dcb,pred_text,yes_no,more_values=predict(upload_file)
-
-    col1,col2,col3=st.columns(3)
-    st.markdown("<br>",unsafe_allow_html=True)
-    #col3,col4=st.columns([10,10])
-    html="<p> <b><h1>"+pred_text+"</h1><br><h2>"+recom_text+"</h2><br><h1>"+recom_text_dcb+"</h1></b></p>"
-    if yes_no is not None:
-        if len(yes_no)==1:
-            for i in yes_no:
-                recom_text_dcb=recom_text_dcb+" "+i
-            html="<p> <b><h1>"+pred_text+"<br></h1><h2>"+recom_text+"</h2><br><h1>"+recom_text_dcb+"</h1></b></p>"
-        else:
-            for i in yes_no:
-                recom_text_dcb=recom_text_dcb+"<br>"+i
-            html="<p> <b><h1>"+pred_text+"</h1><br><h2>"+recom_text+"</h2><br><h1>"+recom_text_dcb+"</h1></b></p>"
-    
 if upload_file is not None:
     recom_text,recom_text_dcb,pred_text,yes_no,more_values=predict(upload_file)
 
@@ -548,8 +532,11 @@ if upload_file is not None:
 
     more_nutri="<center><h1><a href="+more_values+"> Click Hear for more Nutritional Values</a></h1></center>"
     st.markdown(more_nutri,unsafe_allow_html=True)
-
 print("nutri=",nutrients)
+
+
+    
+
 
 
     
