@@ -1,5 +1,4 @@
 import streamlit as st
-import pyodbc
 import tensorflow
 from flask import Flask, request, render_template
 import csv
@@ -107,8 +106,6 @@ def img_analysis(img_path, plot=False):
     pred_text="yummy! It looks like {}".format(predicted_label)
     plt.show()    
     return predicted_label,pred_text
-
-conn = pyodbc.connect(r'Driver=SQL Server;Server=LAPTOP-8UGPMCFP\SQLEXPRESS;Database=User_details;Trusted_Connection=yes;')
 
 cursor = conn.cursor()
 
@@ -392,20 +389,6 @@ img_file_buffer = st.camera_input("Take a picture")
 '''Capture Picture or Upload Picture'''
 upload_file=st.file_uploader("Choose an image:", type=["jpg", "jpeg", "png", "gif"])
 
-if img_file_buffer is not None:
-    # To read image file buffer as a PIL Image:
-    img = Image.open(img_file_buffer)
-
-    # To convert PIL Image to numpy array:
-    img_array = np.array(img)
-
-    # Check the type of img_array:
-    # Should output: <class 'numpy.ndarray'>
-    st.write(type(img_array))
-
-    # Check the shape of img_array:
-    # Should output shape: (height, width, channels)
-    st.write(img_array.shape)
 
 weght_path="C:/Users/Pavan K M/inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5"
 # base model is inception_v3 weights pre-trained on ImageNet
