@@ -417,7 +417,7 @@ model.load_weights(model_file)
 with open('labels.txt', 'r') as f: 
     food101 = [l.strip().lower() for l in f]
 
-if img_file_buffer or img_file_buffer is not None:
+if upload_file or img_file_buffer is not None:
     if upload_file is not none:
           recom_text,recom_text_dcb,pred_text,yes_no,more_values=predict(upload_file)
           col1,col2,col3=st.columns(3)
