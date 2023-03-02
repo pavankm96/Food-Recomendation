@@ -37,7 +37,7 @@ def init_with_service_account(file_path):
          firebase_admin.initialize_app(cred)
      return firestore.client()
 
-db = init_with_service_account('D:/Food Detector Streamlit/food-recommendation-38053-firebase-adminsdk-s51o3-42bf7b6768.json')
+db = init_with_service_account('food-recommendation-38053-firebase-adminsdk-s51o3-42bf7b6768.json')
 
 start = [0]
 passed = [0]
