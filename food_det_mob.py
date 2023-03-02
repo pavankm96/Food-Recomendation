@@ -171,7 +171,7 @@ def predict(filename):
     gender = str(data['username']).strip()
     Diab=str(data['Diabetic']).strip()
     Chol=str(data['Cholestrol']).strip()
-    bp=str(data['BP'][0]).strip()
+    bp=str(data['BP']).strip()
     alergy=str(data['Allergy']).strip()
     #Smoke=str(data['Smoking']).strip()
     #Alcohol=str(data['Alcohol']).strip()
