@@ -105,8 +105,6 @@ def img_analysis(img_path, plot=False):
     plt.show()    
     return predicted_label,pred_text
 
-cursor = conn.cursor()
-
 def search_user_det(user_id):
     users_ref = db.collection(u'users')
     docs = users_ref.stream()
