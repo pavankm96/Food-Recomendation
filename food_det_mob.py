@@ -1,8 +1,6 @@
 import streamlit as st
 import tensorflow
-from flask import Flask, request, render_template
 import csv
-import math
 import os
 import numpy as np
 from tensorflow.keras.preprocessing import image
