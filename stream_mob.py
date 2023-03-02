@@ -118,8 +118,8 @@ def main():
         Allergy=st.selectbox("Allergy",menu_yes_no)
         weight=st.text_input("weight")
         height=st.text_input("height")
-        Smoking=st.selectbox("Smoking",menu_yes_no)
-        Alcohol=st.selectbox("Alcohol",menu_yes_no)
+        #Smoking=st.selectbox("Smoking",menu_yes_no)
+        #Alcohol=st.selectbox("Alcohol",menu_yes_no)
         if st.button("Submit"):
             doc_ref = db.collection(u'users').document(u'{}'.format(user_id))
             doc_ref.set({
@@ -133,9 +133,9 @@ def main():
         u'BP': u'{}'.format(BP),
         u'Allergy': u'{}'.format(Allergy),
         u'weight': u'{}'.format(weight),
-        u'height': u'{}'.format(height),
-        u'Smoking': u'{}'.format(Smoking),
-        u'Alcohol': u'{}'.format(Alcohol)
+        u'height': u'{}'.format(height)
+        #u'Smoking': u'{}'.format(Smoking),
+        #u'Alcohol': u'{}'.format(Alcohol)
         })
 
     #db.close()
