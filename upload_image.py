@@ -172,7 +172,7 @@ def predict(filename):
     Diab=str(data['Diabetic']).strip()
     Chol=str(data['Cholestrol']).strip()
     bp=str(data['BP']).strip()
-    alergy=str(data['Allergy']).strip()
+    #alergy=str(data['Allergy']).strip()
     #Smoke=str(data['Smoking']).strip()
     #Alcohol=str(data['Alcohol']).strip()
     Age=int(str(data['Age']).strip())
