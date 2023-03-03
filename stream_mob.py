@@ -119,7 +119,7 @@ def main():
         Diabetic=st.selectbox("Diabetic",menu_yes_no)
         Cholestrol=st.selectbox("Cholestrol",menu_yes_no)
         BP=st.selectbox("BP",menu_yes_no)
-        Allergy=st.selectbox("Allergy",menu_yes_no)
+        #Allergy=st.selectbox("Allergy",menu_yes_no)
         weight=st.text_input("weight")
         height=st.text_input("height")
         #Smoking=st.selectbox("Smoking",menu_yes_no)
@@ -135,7 +135,7 @@ def main():
         u'Diabetic': u'{}'.format(Diabetic),
         u'Cholestrol': u'{}'.format(Cholestrol),
         u'BP': u'{}'.format(BP),
-        u'Allergy': u'{}'.format(Allergy),
+        #u'Allergy': u'{}'.format(Allergy),
         u'weight': u'{}'.format(weight),
         u'height': u'{}'.format(height)
         #u'Smoking': u'{}'.format(Smoking),
