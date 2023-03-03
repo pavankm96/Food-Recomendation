@@ -172,7 +172,7 @@ def predict(filename):
     Diab=str(data['Diabetic']).strip()
     Chol=str(data['Cholestrol']).strip()
     bp=str(data['BP']).strip()
-    alergy=str(data['Allergy']).strip()
+    #alergy=str(data['Allergy']).strip()
     #Smoke=str(data['Smoking']).strip()
     #Alcohol=str(data['Alcohol']).strip()
     Age=int(str(data['Age']).strip())
@@ -390,21 +390,6 @@ from PIL import Image
 import numpy as np
 
 img_file_buffer = st.camera_input("Take a picture")
-
-if img_file_buffer is not None:
-    # To read image file buffer as a PIL Image:
-    img = Image.open(img_file_buffer)
-
-    # To convert PIL Image to numpy array:
-    img_array = np.array(img)
-
-    # Check the type of img_array:
-    # Should output: <class 'numpy.ndarray'>
-    st.write(type(img_array))
-
-    # Check the shape of img_array:
-    # Should output shape: (height, width, channels)
-    st.write(img_array.shape)
 
 weght_path="inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5"
 # base model is inception_v3 weights pre-trained on ImageNet
