@@ -6,7 +6,7 @@ import numpy as np
 from tensorflow.keras.preprocessing import image
 from tensorflow.python.keras.models import load_model
 from werkzeug.utils import secure_filename
-from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from keras.applications.inception_v3 import preprocess_input
 from keras.applications.inception_v3 import InceptionV3
 from keras.layers import AveragePooling2D, Dropout, Dense, Flatten
